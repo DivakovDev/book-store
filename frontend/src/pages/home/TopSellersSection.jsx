@@ -83,7 +83,6 @@ export const TopSellersSection = () => {
           </SwiperSlide>
         ))
         }
-        <SwiperSlide>Slide 1</SwiperSlide>
       </Swiper>
     </div>
   );
