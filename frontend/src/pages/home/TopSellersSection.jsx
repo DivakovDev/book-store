@@ -10,7 +10,7 @@ import { Pagination, Navigation} from "swiper/modules";
 
 const categories = [
   "Choose a genre",
-  "Bussiness",
+  "Business",
   "Fiction",
   "Horror",
   "Advertisement",
