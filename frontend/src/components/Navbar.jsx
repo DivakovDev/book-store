@@ -3,8 +3,17 @@ import { FaSwatchbook } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineUser, HiOutlineHeart, HiShoppingCart } from "react-icons/hi";
 import avatarImage from "../assets/avatar.png";
+import { useState } from "react";
+
+const navigation = [
+  {name: "Dashboard",href: "/dashboard"},
+  {name: "Orders",href: "/orders"},
+  {name: "Cart Page",href: "/cart"},
+  {name: "Check Out",href: "/checkout"}
+]
 
 export const Navbar = () => {
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false)
   const currentUser = true;
   return (
     <header className="px-4 py-6 mx-auto max-w-screen-2xl">
@@ -29,7 +38,7 @@ export const Navbar = () => {
           <div>
             {currentUser ? (
               <>
-                <button>
+                <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
                   <img
                     src={avatarImage}
                     alt="user profile picture"
@@ -38,6 +47,19 @@ export const Navbar = () => {
                     }`}
                   />
                 </button>
+                {/* dropdown menu */}
+                  {isDropDownOpen && (
+                    <div className='absolute right-0 z-40 w-48 mt-2 bg-white rounded-md shadow-lg'>
+                      <ul className='py-2'>
+                        {navigation.map((option) =>(
+                          <li key={option.name} onClick={() => setIsDropDownOpen(false)}>
+                            <Link to={option.href} className='block px-4 py-2 text-sm hover:bg-gray-100'>{option.name}</Link>
+                          </li>
+                        ))
+                        }
+                      </ul>
+                    </div>
+                  )}
               </>
             ) : (
               <Link to="/login">
