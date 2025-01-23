@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaSwatchbook } from "react-icons/fa6";
+import Logo from "../assets/logo-svg.svg";
 import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineUser, HiOutlineHeart, HiShoppingCart } from "react-icons/hi";
 import avatarImage from "../assets/avatar.png";
@@ -21,7 +21,7 @@ export const Navbar = () => {
         {/* Left SIde */}
         <div className="flex items-center gap-4 md:gap-16">
           <Link to="/">
-            <FaSwatchbook className="w-6 h-6" />
+            <img src={Logo} className="w-8 h-8" />
           </Link>
           {/* search input */}
           <div className="relative w-40 space-x-2 sm:w-72">
@@ -67,12 +67,12 @@ export const Navbar = () => {
               </Link>
             )}
           </div>{" "}
-          <button className="hidden sm:block">
-            <HiOutlineHeart className="size-6" />
+          <button className="hidden sm:block ">
+            <HiOutlineHeart className="duration-500 size-6 hover:text-red-600 hover:fill-red-600" />
           </button>
           <Link
             to="/cart"
-            className="flex items-center p-1 px-2 rounded-md bg-primary sm:px-6"
+            className="flex items-center p-1 px-2 transition duration-500 rounded-md hover:bg-second hover:text-white bg-primary sm:px-6"
           >
             <HiShoppingCart />
             <span className="text-sm font-semibold sm:ml-1">0</span>
