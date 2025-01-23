@@ -1,4 +1,5 @@
 import { BannerSection } from "./BannerSection";
+import { RecomendedSection } from "./RecomendedSection";
 import { TopSellersSection } from "./TopSellersSection";
 
 export const Home = () => {
@@ -6,6 +7,7 @@ export const Home = () => {
     <>
       <BannerSection/>
       <TopSellersSection/>
+      <RecomendedSection/>
     </>
   );
 };
