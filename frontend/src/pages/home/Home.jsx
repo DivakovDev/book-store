@@ -1,4 +1,5 @@
 import { BannerSection } from "./BannerSection";
+import { NewsSection } from "./NewsSection";
 import { RecomendedSection } from "./RecomendedSection";
 import { TopSellersSection } from "./TopSellersSection";
 
@@ -8,6 +9,7 @@ export const Home = () => {
       <BannerSection/>
       <TopSellersSection/>
       <RecomendedSection/>
+      <NewsSection/>
     </>
   );
 };
