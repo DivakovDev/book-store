@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 export const BookCard = ({ book }) => {
   return (
-    <div className="transition-shadow duration-300 rounded-lg ">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:h-72 sm:justify-center">
-        <div className="border rounded-md sm:h-72 sm:flex-shrink-0">
+    <div className="transition-shadow duration-300 rounded-lg">
+      <div className="flex flex-row gap-4 sm:flex-row sm:items-center sm:h-72 sm:justify-center">
+        <div className="w-full border rounded-md sm:w-auto sm:flex-shrink-0 h-50 sm:h-72">
           <Link to={`/books/${book._id}`}>
             <img
               src={`${getImgUrl(book.coverImage)}`}
@@ -16,20 +16,20 @@ export const BookCard = ({ book }) => {
           </Link>
         </div>
 
-        <div>
+        <div className='flex flex-col items-start justify-center'>
           <Link to={`/books/${book._id}`}>
-            <h3 className="mb-3 text-xl font-semibold hover:text-blue-600">
+            <h3 className="h-full mb-3 overflow-hidden text-sm font-semibold sm:text-xl hover:text-blue-600 line-clamp-2 text-ellipsis">
               {book.title}
             </h3>
           </Link>
-          <p className="mb-5 text-gray-600">{book.description.length > 80 ? `${book.description.slice(0,80)}...` : book.description}</p>
-          <p className="mb-5 font-medium">
+          <p className="mb-5 text-xs text-gray-600 sm:text-sm">{book.description.length > 50 ? `${book.description.slice(0,50)}...` : book.description}</p>
+          <p className="mb-5 text-xs font-medium sm:text-sm">
             ${book.newPrice}{" "}
             <span className="ml-2 font-normal line-through">
               ${book.oldPrice}
             </span>
           </p>
-          <button className="flex items-center gap-1 px-12 py-2 space-x-1 text-base font-bold transition-all duration-200 rounded-md cursor-pointer bg-primary font-secondary hover:bg-secondary hover:text-white">
+          <button className="flex items-center gap-1 px-4 py-2 space-x-1 text-sm font-bold transition-all duration-200 rounded-md cursor-pointer sm:text-base bg-primary font-secondary hover:bg-secondary hover:text-white">
             <FiShoppingCart className="" />
             <span>Add to Cart</span>
           </button>
