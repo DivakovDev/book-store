@@ -16,7 +16,7 @@ export const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
   const currentUser = true;
   return (
-    <header className="px-4 py-6 mx-auto max-w-screen-2xl">
+    <header className="max-w-screen-xl px-4 py-6 mx-auto">
       <nav className="flex items-center justify-between">
         {/* Left SIde */}
         <div className="flex items-center gap-4 md:gap-16">
@@ -35,7 +35,7 @@ export const Navbar = () => {
         </div>
         {/* Right Side */}
         <div className="relative flex items-center space-x-2 md:space-x-3">
-          <div>
+          <div className='flex'>
             {currentUser ? (
               <>
                 <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
