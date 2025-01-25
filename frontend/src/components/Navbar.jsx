@@ -4,17 +4,20 @@ import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineUser, HiOutlineHeart, HiShoppingCart } from "react-icons/hi";
 import avatarImage from "../assets/avatar.png";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const navigation = [
-  {name: "Dashboard",href: "/dashboard"},
-  {name: "Orders",href: "/orders"},
-  {name: "Cart Page",href: "/cart"},
-  {name: "Check Out",href: "/checkout"}
-]
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "Orders", href: "/orders" },
+  { name: "Cart Page", href: "/cart" },
+  { name: "Check Out", href: "/checkout" },
+];
 
 export const Navbar = () => {
-  const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const currentUser = false;
+
+  const cartItems = useSelector((state) => state.cart.cartItems);
   return (
     <header className="max-w-screen-xl px-4 py-6 mx-auto 2xl:max-w-screen-2xl">
       <nav className="flex items-center justify-between">
@@ -35,7 +38,7 @@ export const Navbar = () => {
         </div>
         {/* Right Side */}
         <div className="relative flex items-center space-x-2 md:space-x-3">
-          <div className='flex'>
+          <div className="flex">
             {currentUser ? (
               <>
                 <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
@@ -48,18 +51,25 @@ export const Navbar = () => {
                   />
                 </button>
                 {/* dropdown menu */}
-                  {isDropDownOpen && (
-                    <div className='absolute right-0 z-40 w-48 mt-2 bg-white rounded-md shadow-lg'>
-                      <ul className='py-2'>
-                        {navigation.map((option) =>(
-                          <li key={option.name} onClick={() => setIsDropDownOpen(false)}>
-                            <Link to={option.href} className='block px-4 py-2 text-sm hover:bg-gray-100'>{option.name}</Link>
-                          </li>
-                        ))
-                        }
-                      </ul>
-                    </div>
-                  )}
+                {isDropDownOpen && (
+                  <div className="absolute right-0 z-40 w-48 mt-2 bg-white rounded-md shadow-lg">
+                    <ul className="py-2">
+                      {navigation.map((option) => (
+                        <li
+                          key={option.name}
+                          onClick={() => setIsDropDownOpen(false)}
+                        >
+                          <Link
+                            to={option.href}
+                            className="block px-4 py-2 text-sm hover:bg-gray-100"
+                          >
+                            {option.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </>
             ) : (
               <Link to="/login">
@@ -75,7 +85,13 @@ export const Navbar = () => {
             className="flex items-center p-1 px-2 transition duration-500 rounded-md hover:bg-second hover:text-white bg-primary sm:px-6"
           >
             <HiShoppingCart />
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            {cartItems.length > 0 ? (
+              <span className="text-sm font-semibold sm:ml-1">
+                {cartItems.length}
+              </span>
+            ) : (
+              <span className="text-sm font-semibold sm:ml-1">0</span>
+            )}
           </Link>
         </div>
       </nav>
