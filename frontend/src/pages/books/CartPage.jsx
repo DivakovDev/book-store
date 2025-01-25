@@ -1,5 +1,7 @@
+// use dispatch and selector for getting functionallities from cartSlice
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+// use getImgUrl for getting image from our data
 import { getImgUrl } from "../../utils/getImgUrl";
 import { removeFromCart, clearCart } from "../../redux/features/cart/cartSlice";
 
@@ -8,14 +10,17 @@ export const CartPage = () => {
 
   const dispatch = useDispatch();
 
+//   remove selected product
   const handleRemoveFromCart = (prod) => {
     dispatch(removeFromCart(prod));
   };
 
+//   clear cart
   const handleClearCart = () => {
     dispatch(clearCart());
   };
 
+//   calculate total price
   const totalPrice = cartItems
     .reduce((acc, item) => acc + item.newPrice, 0)
     .toFixed(2);
