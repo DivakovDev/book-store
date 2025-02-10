@@ -11,7 +11,7 @@ export const SingleBook = () => {
 
   const dispatch = useDispatch();
 
-  // add selected product
+  // add selected product to card
   const handleAddToCart = (prod) => {
     dispatch(addToCart(prod));
   };
@@ -49,7 +49,7 @@ export const SingleBook = () => {
 
         <button
           onClick={() => handleAddToCart(book)}
-          className="flex items-center gap-1 px-6 space-x-1 btn-primary "
+          className="flex items-center gap-1 px-6 py-2 space-x-1 text-base font-bold transition-all duration-200 rounded-md cursor-pointer bg-primary font-secondary hover:bg-secondary hover:text-white "
         >
           <FiShoppingCart className="" />
           <span>Add to Cart</span>

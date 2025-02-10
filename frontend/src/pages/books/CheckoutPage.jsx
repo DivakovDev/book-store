@@ -44,7 +44,7 @@ export const CheckoutPage = () => {
           <div>
             <div>
               <h2 className="mb-2 text-xl font-semibold text-gray-600">
-                Cash On Delevary
+                Cash On Delivery
               </h2>
               <p className="mb-2 text-gray-500">Total Price: ${totalPrice}</p>
               <p className="mb-6 text-gray-500">
