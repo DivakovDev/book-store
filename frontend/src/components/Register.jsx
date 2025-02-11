@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/AuthContext";
 
 export const Register = () => {
   const [message, setMessage] = useState("");
+
+  const { registerUser } = useAuth();
+  console.log(registerUser)
+
   const {
     register,
     handleSubmit,
@@ -12,10 +17,17 @@ export const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await registerUser(data.email, data.password);
+      alert("User registered successfully!");
+    } catch (error) {
+      setMessage("Please provide a valid email and password");
+      console.error(error);
+    }
+  };
 
-const handleGoogleSignIn = () => {
-}
+  const handleGoogleSignIn = () => {};
 
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center">
@@ -73,7 +85,10 @@ const handleGoogleSignIn = () => {
           </Link>
         </p>
         <div className="mt-4">
-          <button onClick={handleGoogleSignIn} className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold text-white rounded bg-second hover:bg-blue-700 focus:outline-none">
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold text-white rounded bg-second hover:bg-blue-700 focus:outline-none"
+          >
             <FaGoogle className="mr-2" />
             Sign in with Google
           </button>
@@ -86,4 +101,3 @@ const handleGoogleSignIn = () => {
     </div>
   );
 };
-
