@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 
 export const Register = () => {
   const [message, setMessage] = useState("");
 
-  const { registerUser } = useAuth();
-  console.log(registerUser)
+  const { registerUser, signInWithGoogle, signInWithGithub } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,7 +27,26 @@ export const Register = () => {
     }
   };
 
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      alert("Login successful!");
+      navigate("/");
+    } catch (error) {
+      alert("Google sign in failed!");
+      console.error(error);
+    }
+  };
+  const handleGithubSignIn = async () => {
+    try {
+      await signInWithGithub();
+      alert("Login successful!");
+      navigate("/");
+    } catch (error) {
+      alert("Github sign in failed!");
+      console.error(error);
+    }
+  };
 
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center">
@@ -87,10 +106,19 @@ export const Register = () => {
         <div className="mt-4">
           <button
             onClick={handleGoogleSignIn}
-            className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold text-white rounded bg-second hover:bg-blue-700 focus:outline-none"
+            className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold transition-all duration-500 bg-white border-2 rounded text-second hover:bg-second hover:text-white translate focus:outline-none"
           >
             <FaGoogle className="mr-2" />
             Sign in with Google
+          </button>
+        </div>
+        <div className="mt-4">
+          <button
+            onClick={handleGithubSignIn}
+            className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold transition-all duration-500 bg-white border-2 rounded text-second hover:bg-second hover:text-white translate focus:outline-none"
+          >
+            <FaGithub className="mr-2" />
+            Sign in with Github
           </button>
         </div>
 

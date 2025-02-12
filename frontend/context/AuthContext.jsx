@@ -1,8 +1,17 @@
 import { createContext, useContext, useState } from "react";
 import { auth } from "../firebase/firebase.config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 
 const AuthContext = createContext();
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -19,14 +28,26 @@ export const AuthProvider = ({ children }) => {
   };
 
   // login user
-  const loginUser = async (email, password) =>{
-    return await signInWithEmailAndPassword(auth, email, password)
-  }
+  const loginUser = async (email, password) => {
+    return await signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // login with google
+  const signInWithGoogle = async () => {
+    return await signInWithPopup(auth, googleProvider);
+  };
+
+  // login  with github
+  const signInWithGithub = async () => {
+    return await signInWithPopup(auth, githubProvider);
+  };
 
   const value = {
     currentUser,
     registerUser,
-    loginUser
+    loginUser,
+    signInWithGoogle,
+    signInWithGithub,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

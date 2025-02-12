@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 
 export const Login = () => {
   const [message, setMessage] = useState("");
 
-  const { loginUser } = useAuth();
-  const navigate = useNavigate()
+  const { loginUser, signInWithGoogle, signInWithGithub } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -17,16 +17,37 @@ export const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     try {
       await loginUser(data.email, data.password);
       alert("Login successful!");
-      navigate("/")
+      navigate("/");
     } catch (error) {
       setMessage("Please provide a valid email and password");
       console.error(error);
     }
-  }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      alert("Login successful!");
+      navigate("/");
+    } catch (error) {
+      alert("Google sign in failed!");
+      console.error(error);
+    }
+  };
+  const handleGithubSignIn = async () => {
+    try {
+      await signInWithGithub();
+      alert("Login successful!");
+      navigate("/");
+    } catch (error) {
+      alert("Github sign in failed!");
+      console.error(error);
+    }
+  };
 
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center">
@@ -84,9 +105,21 @@ export const Login = () => {
           </Link>
         </p>
         <div className="mt-4">
-          <button className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold text-white rounded bg-second hover:bg-blue-700 focus:outline-none">
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold transition-all duration-500 bg-white border-2 rounded text-second hover:bg-second hover:text-white translate focus:outline-none"
+          >
             <FaGoogle className="mr-2" />
             Sign in with Google
+          </button>
+        </div>
+        <div className="mt-4">
+          <button
+            onClick={handleGithubSignIn}
+            className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold transition-all duration-500 bg-white border-2 rounded text-second hover:bg-second hover:text-white translate focus:outline-none"
+          >
+            <FaGithub className="mr-2" />
+            Sign in with Github
           </button>
         </div>
 
