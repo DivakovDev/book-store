@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 export const Register = () => {
   const [message, setMessage] = useState("");
 
-  const { registerUser, signInWithGoogle, signInWithGithub } = useAuth();
+  const { registerUser, signInWithGoogle, signInWithGitHub } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -37,14 +37,19 @@ export const Register = () => {
       console.error(error);
     }
   };
-  const handleGithubSignIn = async () => {
+  const handleGitHubSignIn = async () => {
     try {
-      await signInWithGithub();
+      await signInWithGitHub();
       alert("Login successful!");
       navigate("/");
     } catch (error) {
-      alert("Github sign in failed!");
-      console.error(error);
+      console.error("GitHub Sign-In Error:", error);
+      let errorMessage = "GitHub sign-in failed!";
+      if (error.code === "auth/account-exists-with-different-credential") {
+        errorMessage =
+          "An account already exists with the same email but different login method.";
+        alert(errorMessage);
+      }
     }
   };
 
@@ -114,11 +119,11 @@ export const Register = () => {
         </div>
         <div className="mt-4">
           <button
-            onClick={handleGithubSignIn}
+            onClick={handleGitHubSignIn}
             className="flex flex-wrap items-center justify-center w-full gap-1 px-4 py-2 font-bold transition-all duration-500 bg-white border-2 rounded text-second hover:bg-second hover:text-white translate focus:outline-none"
           >
             <FaGithub className="mr-2" />
-            Sign in with Github
+            Sign in with GitHub
           </button>
         </div>
 

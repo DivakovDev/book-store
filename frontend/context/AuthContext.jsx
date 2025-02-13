@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // login  with github
-  const signInWithGithub = async () => {
+  const signInWithGitHub = async () => {
     return await signInWithPopup(auth, githubProvider);
   };
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     registerUser,
     loginUser,
     signInWithGoogle,
-    signInWithGithub,
+    signInWithGitHub,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
