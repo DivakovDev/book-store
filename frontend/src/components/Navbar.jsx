@@ -5,6 +5,7 @@ import { HiOutlineUser, HiOutlineHeart, HiShoppingCart } from "react-icons/hi";
 import avatarImage from "../assets/avatar.png";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useAuth } from "../../context/AuthContext";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard" },
@@ -15,7 +16,11 @@ const navigation = [
 
 export const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const currentUser = false;
+  const { currentUser, logOut } = useAuth();
+
+  const handleLogout = () => {
+    logOut();
+  };
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   return (
@@ -52,7 +57,7 @@ export const Navbar = () => {
                 </button>
                 {/* dropdown menu */}
                 {isDropDownOpen && (
-                  <div className="absolute right-0 z-40 w-48 mt-2 bg-white rounded-md shadow-lg">
+                  <div className="absolute right-0 z-40 w-48 mt-2 bg-white rounded-md shadow-lg top-6">
                     <ul className="py-2">
                       {navigation.map((option) => (
                         <li
@@ -67,6 +72,14 @@ export const Navbar = () => {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button
+                          className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 )}
