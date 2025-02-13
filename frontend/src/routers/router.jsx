@@ -6,19 +6,28 @@ import { Register } from "../components/Register";
 import { CartPage } from "../pages/books/CartPage";
 import { CheckoutPage } from "../pages/books/CheckoutPage";
 import { SingleBook } from "../pages/books/SingleBook";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ path: "/", element: <Home/> },
-        { path: "/orders", element: <h1>Orders</h1> },
-        { path: "/about", element: <h1>About</h1> },
-        { path: "/login", element: <Login/> },
-        { path: "/register", element: <Register/> },
-        { path: "/cart", element: <CartPage/> },
-        { path: "/checkout", element: <CheckoutPage/> },
-        { path: "/books/:id", element: <SingleBook/> },
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/orders", element: <h1>Orders</h1> },
+      { path: "/about", element: <h1>About</h1> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+      { path: "/cart", element: <CartPage /> },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoute>
+            <CheckoutPage />
+          </PrivateRoute>
+        ),
+      },
+      { path: "/books/:id", element: <SingleBook /> },
     ],
   },
 ]);
