@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       require: true,
     },
-    productsIds: [
+    productIds: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Book",
