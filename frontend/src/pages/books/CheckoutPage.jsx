@@ -45,10 +45,8 @@ export const CheckoutPage = () => {
       Swal.fire({
         title: "Confirmed Order",
         text: "Your order placed successfully!",
-        icon: "warning",
-        showCancelButton: true,
+        icon: "success",
         confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
         confirmButtonText: "Yes, It's Okay!",
       });
       navigate("/orders");
